@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WhiskMeAway Bakery</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>WhiskMeAway</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="home" class="page-section">
+        <div class="story-flex">
+            <div class="story-text">
+                <h2><span>Our Story</span></h2>
+                <p>
+                WhiskMeAway was born from the love of home baking and the joy of sharing sweet treats with friends and family.
+                Our founder grew up baking for firefighters across America, learning that the best recipes are made with a little sugar
+                and a lot of heart. From those warm, flour-covered beginnings came a mission: bring that same feeling to every
+                customer who opens a WhiskMeAway box.
+                </p>
+            </div>
+            <div class="story-image">
+                <img src="images/story-graphic.png" alt="Mother baking cookies" />
+            </div>
+        </div>
+
+
+      <section id="gallery">
+        <h2>Fresh from the Oven</h2>
+        <div class="gallery-scroll">
+          <img src="images/chocmuff1.png" alt="Chocolate Muffins" />
+          <img src="images/chocstraw1.png" alt="Chocolate Covered Strawberries" />
+          <img src="images/cookiebox1.png" alt="Cookie Gift Box 1" />
+          <img src="images/cookiebox2.png" alt="Cookie Gift Box 2" />
+          <img src="images/cookienote1.png" alt="Thank You Cookie Box" />
+        </div>
+      </section>
+    </section>
+
+    <section id="menu" class="page-section">
+      <h2><span>Our Menu</span></h2>
+      <ul class="menu-list">
+        <li><span class="item-name">Chocolate Chip Cookies</span><span class="item-price">$12/dozen</span></li>
+        <li><span class="item-name">Double Chocolate Muffins</span><span class="item-price">$15/dozen</span></li>
+        <li><span class="item-name">Decorated Strawberries</span><span class="item-price">$18/dozen</span></li>
+        <li><span class="item-name">Assorted Treat Box</span><span class="item-price">$25</span></li>
+        <li><span class="item-name">Seasonal Specials</span><span class="item-price">Ask for Pricing</span></li>
+      </ul>
+    </section>
+
+    <section id="contact" class="page-section">
+      <h2><span>Contact Us</span></h2>
+      <p>Email: <a href="mailto:whiskmeawayeats@gmail.com">whiskmeawayeats@gmail.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 WhiskMeAway Bakery. All rights reserved.</p>
+  </footer>
+
+  <script>
+    $(document).ready(function () {
+      // Handle nav clicks to show/hide sections
+      $('nav a').on('click', function (e) {
+        e.preventDefault();
+        const target = $(this).attr('href');
+        $('.page-section').hide();
+        $(target).show();
+      });
+
+      // Show only home section on load
+      $('.page-section').hide();
+      $('#home').show();
+    });
+  </script>
+</body>
+</html>
