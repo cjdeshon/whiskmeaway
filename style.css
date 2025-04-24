@@ -11,6 +11,8 @@ body {
     text-align: center;
     padding: 40px 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0; /* Ensure no gap below */
+    padding-bottom: 0;
   }
   
   header h1 {
@@ -23,6 +25,25 @@ body {
     font-size: 1.2rem;
     color: #7b4f4f;
     margin-top: 10px;
+  }
+
+  .logo-wrapper {
+    height: 100px;         /* controls visible height */
+    width: auto;
+    overflow: hidden;
+    border-radius: 20px;
+    display: inline-block;
+    max-width: 250px;
+    margin-bottom: 0; /* Prevents space under the image */
+  }
+  
+  .logo {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+    transform: translateY(-29%);
+    border-radius: 20px;
   }
 
   nav {
