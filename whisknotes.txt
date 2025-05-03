@@ -6,3 +6,4 @@ ContactForm: Formspree
 Next Meeting:
 - menu items
 - telephone number
+- form email update
