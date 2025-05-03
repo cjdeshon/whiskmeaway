@@ -1,0 +1,8 @@
+Owner: Dasha Schell
+Company Name: WhiskMeAwayEats
+Hosting: Namecheap
+ContactForm: Formspree
+
+Next Meeting:
+- menu items
+- telephone number
