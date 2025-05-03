@@ -44,11 +44,11 @@
       <section id="gallery">
         <h2>Fresh from the Oven</h2>
         <div class="gallery-scroll">
-          <img src="images/chocmuff1.png" alt="Chocolate Muffins" />
-          <img src="images/chocstraw1.png" alt="Chocolate Covered Strawberries" />
-          <img src="images/cookiebox1.png" alt="Cookie Gift Box 1" />
-          <img src="images/cookiebox2.png" alt="Cookie Gift Box 2" />
-          <img src="images/cookienote1.png" alt="Thank You Cookie Box" />
+          <a href="#menu"><img src="images/chocmuff1.png" alt="Chocolate Muffins" /></a>
+          <a href="#menu"><img src="images/chocstraw1.png" alt="Chocolate Covered Strawberries" /></a>
+          <a href="#menu"><img src="images/cookiebox1.png" alt="Cookie Gift Box 1" /></a>
+          <a href="#menu"><img src="images/cookiebox2.png" alt="Cookie Gift Box 2" /></a>
+          <a href="#menu"><img src="images/cookienote1.png" alt="Thank You Cookie Box" /></a>
         </div>
       </section>
     </section>
@@ -92,14 +92,24 @@
 
   <script>
     $(document).ready(function () {
-      // Handle nav clicks to show/hide sections
+      // Existing nav behavior
       $('nav a').on('click', function (e) {
         e.preventDefault();
         const target = $(this).attr('href');
         $('.page-section').hide();
         $(target).show();
       });
-
+  
+      // ✅ Enable any in-page link (like gallery image) to show a section
+      $('a[href^="#"]').on('click', function (e) {
+        const target = $(this).attr('href');
+        if ($(target).length && $(target).hasClass('page-section')) {
+          e.preventDefault();
+          $('.page-section').hide();
+          $(target).show();
+        }
+      });
+  
       // Show only home section on load
       $('.page-section').hide();
       $('#home').show();
