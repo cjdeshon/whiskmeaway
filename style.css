@@ -239,6 +239,13 @@ body {
     max-width: 600px;
     margin: auto;
   }
+
+  .menu-details {
+    font-size: 0.95rem;
+    color: #6b4c3a;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
   
   .menu-list li {
     display: flex;
