@@ -249,10 +249,14 @@ body {
   
   .menu-list li {
     display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
+    flex-direction: column; /* stack content vertically */
+    padding: 20px;
     border-bottom: 1px solid #e18a62;
     font-size: 1.1rem;
+    background-color: #fff8f2;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   }
   
   .menu-list .item-name {
@@ -261,8 +265,9 @@ body {
   }
   
   .menu-list .item-price {
-    font-weight: 600;
-    color: #7a4e2d;
+    color: #9b5a3c;
+    font-weight: 500;
+    margin-bottom: 6px;
   }
 
   #menu h2,
