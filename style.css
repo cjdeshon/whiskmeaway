@@ -140,6 +140,27 @@ body {
     font-size: 1.1rem;
     line-height: 1.6;
   }
+
+  .contact-form-container select {
+      font-size: 16px;
+      width: 100%;
+      margin-top: 6px;
+      border: 1px solid #d4a373;
+      border-radius: 6px;
+      padding: 12px;
+      background-color: #fffdfb;
+      color: #4b2e2e;
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%234b2e2e" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px 16px;
+    }
+
+    .contact-form-container select:focus {
+      border-color: var(--secondary);
+      outline: none;
+    }
   
   footer {
     background-color: #f5c9ae;
@@ -257,6 +278,12 @@ body {
     border-radius: 8px;
     margin-bottom: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .menu-list li:hover {
+    background-color: #ffe8d9;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    transition: 0.2s ease;
   }
   
   .menu-list .item-name {

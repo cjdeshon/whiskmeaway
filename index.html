@@ -60,27 +60,27 @@
     <section id="menu" class="page-section">
       <h2><span>Our Menu</span></h2>
       <ul class="menu-list">
-        <li>
+        <li onclick="goToContactWithItem('Banana Bread')" style="cursor: pointer;">
           <span class="item-name">Banana Bread</span>
           <span class="item-price">$15 / $3.50 per slice</span>
           <div class="menu-details">Flavors: Regular Chocolate Chip, Pecan, Nut Mix, Walnut</div>
         </li>
-        <li>
-          <span class="item-name">Whole Cheesecake</span>
+        <li onclick="goToContactWithItem('Cheesecake')" style="cursor: pointer;">
+          <span class="item-name">Cheesecake</span>
           <span class="item-price">$17 / $3.50 per slice</span>
           <div class="menu-details">Flavors: Strawberry, Lemon, Raspberry, Regular<br>Toppings: +$3.00 each</div>
         </li>
-        <li>
+        <li onclick="goToContactWithItem('Cookies')" style="cursor: pointer;">
           <span class="item-name">Cookies</span>
           <span class="item-price">$12/dozen / $3.00 each</span>
           <div class="menu-details">Flavors: Chocolate Chip, Lemon, Sugar, White Chocolate Chip, Oatmeal Raisin</div>
         </li>
-        <li>
+        <li onclick="goToContactWithItem('Muffins')" style="cursor: pointer;">
           <span class="item-name">Muffins</span>
           <span class="item-price">$15/dozen / $4.00 each</span>
           <div class="menu-details">Flavors: Triple Chocolate, Blueberry, Mixed Berry</div>
         </li>
-        <li>
+        <li onclick="goToContactWithItem('Cinnamon Rolls')" style="cursor: pointer;">
           <span class="item-name">Cinnamon Rolls</span>
           <span class="item-price">$20/dozen / $6.00 each</span>
         </li>
@@ -96,13 +96,46 @@
           Place an Order
           <img src="images/favicon1.png" alt="cupcake" class="icon-right" />
         </h3>
+        
         <form action="https://formspree.io/f/xqaqpgzv" method="POST">
+          <label for="name">Your Name</label>
+          <input type="text" name="name" id="name" placeholder="Jane Doe" required />
+
           <label for="email">Your Email</label>
           <input type="email" name="email" id="email" placeholder="you@example.com" required />
-      
-          <label for="order">What would you like to order?</label>
-          <textarea name="order" id="order" rows="5" placeholder="List your menu items here..." required></textarea>
-      
+
+          <label for="menuItem">Select Menu Item</label>
+          <select id="menuItem" onchange="updateFlavors()" required>
+            <option disabled selected value="">-- Choose an item --</option>
+            <option value="Banana Bread">Banana Bread</option>
+            <option value="Cheesecake">Cheesecake</option>
+            <option value="Cookies">Cookies</option>
+            <option value="Muffins">Muffins</option>
+            <option value="Cinnamon Rolls">Cinnamon Rolls</option>
+          </select>
+
+          <label for="flavor">Choose a Flavor</label>
+          <select id="flavor" required>
+            <option disabled selected value="">-- Select item first --</option>
+          </select>
+
+          <label for="amount">Amount</label>
+          <select id="amount" required>
+            <option disabled selected value="">-- Choose amount --</option>
+            <option value="W">Whole (W)</option>
+            <option value="Dz">Dozen (Dz)</option>
+            <option value="Slice">Slice</option>
+            <option value="Single">Single</option>
+          </select>
+
+          <button type="button" onclick="addOrder()">Add to Order</button>
+
+          <ul id="orderList"></ul>
+          <input type="hidden" name="order" id="order" />
+
+          <label for="requests">Any special requests?</label>
+          <textarea name="requests" id="requests" rows="4" placeholder="Let us know any special instructions..."></textarea>
+
           <button type="submit">Send Order</button>
         </form>
       </div>
@@ -139,7 +172,87 @@
       // Show only home section on load
       $('.page-section').hide();
       $('#home').show();
-    });
+      });
+
+      //menu script
+      function goToContactWithItem(itemName) {
+        // Show contact section only
+        $('.page-section').hide();
+        $('#contact').show();
+
+        // Scroll to contact smoothly (optional)
+        $('html, body').animate({
+          scrollTop: $('#contact').offset().top
+        }, 500);
+
+        // Select the item in the dropdown
+        const menuSelect = document.getElementById("menuItem");
+        menuSelect.value = itemName;
+        updateFlavors(); // Triggers flavor population
+
+        // Clear and reset flavor/amount dropdowns
+        document.getElementById("flavor").innerHTML = `<option disabled selected value="">-- Choose a flavor --</option>`;
+        document.getElementById("amount").selectedIndex = 0;
+      }
+
+      //form script
+      const menuFlavors = {
+        "Banana Bread": ["Regular Chocolate Chip", "Pecan", "Nut Mix", "Walnut"],
+        "Cheesecake": ["Strawberry", "Lemon", "Raspberry", "Regular"],
+        "Cookies": ["Chocolate Chip", "Lemon", "Sugar", "White Chocolate Chip", "Oatmeal Raisin"],
+        "Muffins": ["Triple Chocolate", "Blueberry", "Mixed Berry"],
+        "Cinnamon Rolls": []
+      };
+
+      function updateFlavors() {
+        const item = document.getElementById("menuItem").value;
+        const flavorSelect = document.getElementById("flavor");
+
+        flavorSelect.innerHTML = ""; // clear existing options
+
+        if (menuFlavors[item] && menuFlavors[item].length > 0) {
+          flavorSelect.disabled = false;
+          flavorSelect.innerHTML = `<option disabled selected value="">-- Choose a flavor --</option>`;
+          menuFlavors[item].forEach(flavor => {
+            const option = document.createElement("option");
+            option.value = flavor;
+            option.textContent = flavor;
+            flavorSelect.appendChild(option);
+          });
+        } else {
+          flavorSelect.disabled = true;
+          const option = document.createElement("option");
+          option.value = "None";
+          option.textContent = "N/A";
+          flavorSelect.appendChild(option);
+        }
+      }
+
+      function addOrder() {
+        const item = document.getElementById("menuItem").value;
+        const flavor = document.getElementById("flavor").value;
+        const amount = document.getElementById("amount").value;
+        const orderInput = document.getElementById("order");
+        const orderList = document.getElementById("orderList");
+
+        if (!item || !amount || (flavor === "" && !document.getElementById("flavor").disabled)) return;
+
+        let entry = `${item}`;
+        if (flavor && flavor !== "None") entry += ` - ${flavor}`;
+        entry += ` (${amount})`;
+
+        const listItem = document.createElement("li");
+        listItem.textContent = entry;
+        orderList.appendChild(listItem);
+
+        orderInput.value += orderInput.value ? `, ${entry}` : entry;
+
+        // Reset selectors
+        document.getElementById("menuItem").selectedIndex = 0;
+        document.getElementById("flavor").innerHTML = `<option disabled selected value="">-- Select item first --</option>`;
+        document.getElementById("flavor").disabled = false;
+        document.getElementById("amount").selectedIndex = 0;
+      }
   </script>
 </body>
 </html>
